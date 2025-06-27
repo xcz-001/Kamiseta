@@ -63,17 +63,31 @@ label {
   src: url('../font/Kayana-demo.otf') format('opentype');
 }
 /* Apply custom font */
-.welcome-msg{
-  font-family: 'kayana', sans-serif;
-  font-size: 5rem;
+.kayana{
+  font-family: 'kayana', 'Segoe UI';
 }
 
 body {
   background-image: url('../img/homebg.png');
   background-size: cover;
   background-position: center;
+  padding-top: 1vw;
 }
 
 .form-control::placeholder {
-  color: #cccccc; /* Light gray or any color you want */
+  color: #cccccc;
+}
+
+.welcome-msg {
+  width: 90vw;
+  font-size: 6vw;             /* Large responsive typography */
+  margin: 0 auto 2vw auto; /* Top, right, bottom, left margins */
+  text-align: center;
+  z-index: 1000;             /* Stay above toggle buttons/forms */
+  pointer-events: none;       /* Prevent interaction/movement */
+  user-select: none;          /* Prevent selection */
+}
+
+.container {
+  padding-top: 0;           /* Remove extra top padding */
 }

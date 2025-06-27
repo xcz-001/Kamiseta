@@ -8,37 +8,47 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body class="bg-dark text-light">
-  <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-    <h1 class="mb-4 welcome-msg">Welcome to Kamiseta</h1>
+  <div class="container d-flex flex-column align-items-center justify-content-start min-vh-100">
+    <h1 class="mb-4 kayana welcome-msg">Welcome to Kamiseta</h1>
     <div class="btn-group mb-4" role="group">
       <button id="toggle-login" class="btn btn-outline-light active">Login</button>
       <button id="toggle-signup" class="btn btn-outline-light">Signup</button>
     </div>
 
-    <form id="login-form" class="w-100" style="max-width: 400px;">
+    <form id="loginForm" class="w-100" style="max-width: 400px;">
       <div class="mb-3">
-        <input type="text" class="form-control" id="username" placeholder="Username" required />
+        <input name="username" type="text" class="form-control" id="username" placeholder="Username" required />
       </div>
       <div class="mb-3">
-        <input type="password" class="form-control" id="password" placeholder="Password" required />
+        <input name="password" type="password" class="form-control" id="password" placeholder="Password" required />
       </div>
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
 
-    <form id="signup-form" class="w-100 d-none" style="max-width: 400px;">
+    <form id="signupForm" class="w-100 d-none" style="max-width: 400px;">
       <div class="mb-3">
-        <label for="signupName" class="form-label">Username</label>
-        <input type="text" class="form-control" id="signupUsername" placeholder="john_doe123" required />
+        <label for="signupName" class="form-label">Full Name</label>
+        <input type="text" name="name" class="form-control" id="signupName" placeholder="John D. Doe" required />
+      </div>
+      <div class="mb-3">
+        <label for="signupUsername" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" id="signupUsername" placeholder="john_doe123" required />
       </div>
       <div class="mb-3">
         <label for="signupEmail" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="signupEmail" placeholder="john_doe123@example.com" required />
+        <input type="email" name="email" class="form-control" id="signupEmail" placeholder="johndoe123@example.com" required />
       </div>
       <div class="mb-3">
-        <label for="signupPassword" class="form-label">Password</label>
-        <input type="password" minlength="8" class="form-control" id="signupPassword" placeholder="securePassword123" required />
+        <label for="signupPassword1" class="form-label">Password</label>
+        <input type="password" minlength="8" class="form-control" id="signupPassword1" placeholder="securePassword123" required />
+      </div>
+      <div class="mb-3">
+        <label for="signupPassword2" class="form-label">Re-enter Password</label>
+        <input type="password" name="password" minlength="8" class="form-control" id="signupPassword2" placeholder="securePassword123" required />
+        <input type="hidden" name="role" value="user">
       </div>
       <button type="submit" class="btn btn-success w-100">Signup</button>
+      <!-- submit event listener at script.js -->
     </form>
   </div>
 
