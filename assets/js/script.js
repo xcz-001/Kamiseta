@@ -74,13 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const result = await res.json();
-        console.log(res.status,result.user);
+        // console.log(res.status,result.user);
         if (res.ok) {
           loginForm.reset();
           if (result.user.role === 'user') {
             window.location.href = 'pages/home.php';
           } else if (result.user.role === 'admin') {
-            window.location.href = 'pages/admin/admin.php';
+            window.location.href = 'pages/admin/index.php';
           }
         } else {
           alert(result.error || 'Login failed');

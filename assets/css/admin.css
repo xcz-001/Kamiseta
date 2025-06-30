@@ -1,0 +1,95 @@
+/* styles.css - Kamiseta Dark Theme */
+
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('../img/homebg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+table {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border: 1px solid #444
+}
+
+h1 {
+  color: #ffffff;
+}
+
+.btn-outline-light.active {
+  background-color: #ffffff;
+  color: #121212;
+  border-color: #ffffff;
+}
+
+.form-control {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border: 1px solid #444;
+}
+
+.form-control:focus {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-color: #03dac6;
+  box-shadow: 0 0 0 0;
+}
+
+.form-control::placeholder {
+  color: #cccccc;
+}
+
+
+.btn-primary {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+}
+
+.btn-primary:hover {
+  background-color: #9c6eff;
+  border-color: #9c6eff;
+}
+
+.btn-success {
+  background-color: #03dac6;
+  border-color: #03dac6;
+}
+
+.btn-success:hover {
+  background-color: #00bfa5;
+  border-color: #00bfa5;
+}
+
+label {
+  color: #cccccc;
+}
+
+/* ::placeholder {
+  color: #999;
+  opacity: 1;
+} */
+.sidebar {
+  width: 250px;
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed .link-text {
+  display: none;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-link i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}

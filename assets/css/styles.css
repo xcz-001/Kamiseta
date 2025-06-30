@@ -1,4 +1,4 @@
-/* styles.css - Kamiseta Dark Theme */
+
 
 body {
   background-color: #121212;
@@ -71,7 +71,6 @@ body {
   background-image: url('../img/homebg.png');
   background-size: cover;
   background-position: center;
-  padding-top: 1vw;
 }
 
 .form-control::placeholder {
