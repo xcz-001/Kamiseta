@@ -4,7 +4,8 @@ if (
   !isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK ||
     empty($_POST['name']) ||
     empty($_POST['description']) ||
-    !isset($_POST['qty']) ||
+    !isset($_POST['category']) ||
+    !isset($_POST['stock']) ||
     !isset($_POST['price'])
 ) {
     http_response_code(400);
@@ -14,8 +15,11 @@ if (
 
 $name = $_POST['name'];
 $description = $_POST['description'];
-$qty = (int)$_POST['qty'];
+$category = $_POST['category'];
+$stock = (int)$_POST['stock'];
 $price = (float)$_POST['price'];
+$filename =  basename($_FILES["image"]["name"]);;
+
 
 // Save image
 $target_dir = "../../uploads/";
@@ -23,7 +27,6 @@ if (!is_dir($target_dir)) {
     mkdir($target_dir, 0777, true);
 }
 
-$filename = uniqid() . "_" . basename($_FILES["image"]["name"]);
 $target_file = $target_dir . $filename;
 
 if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
@@ -32,11 +35,9 @@ if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
     exit;
 }
 
-$image_path = "uploads/" . $filename;
-
-$stmt = $pdo->prepare("INSERT INTO products (name, description, qty, price, image) VALUES (?, ?, ?, ?, ?)");
+$stmt = $pdo->prepare("INSERT INTO products (name, description, category, stock, price, filename) VALUES (?, ?, ?, ?, ?, ?)");
 try {
-    $stmt->execute([$name, $description, $stock, $price, $image_url]);
+    $stmt->execute([$name, $description, $category, $stock, $price, $filename]);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["error" => "DB Error: " . $e->getMessage()]);
@@ -45,4 +46,3 @@ try {
 
 http_response_code(201);
 echo json_encode(["success" => true]);
-?>

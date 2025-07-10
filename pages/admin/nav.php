@@ -16,18 +16,18 @@
     </button>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">
+        <a class="nav-link text-white active-page" data-page="users" href="#">
           <i class="bi 	bi-people"></i> <span class="link-text">Users</span>
         </a>
       </li>
       <li class="nav-item">
        <div class="dropdown">
-          <a href="#" class="nav-link d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownProduct" data-bs-toggle="dropdown" aria-expanded="true">
-            <i class="bi bi-box-seam"></i> <span class="link-text">Products</span>
+          <a href="#" data-page="products" class="nav-link d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownProduct" data-bs-toggle="dropdown" aria-expanded="true">
+            <i class="bi bi-box-seam"></i> <span class="link-text ">Products</span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownProduct">
-              <li><span class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</span></li>
+              <li><button class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Barong</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -43,7 +43,7 @@
         </div>
        </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">
+        <a data-page="sales" class="nav-link text-white" href="#">
           <i class="bi bi-graph-up"></i> <span class="link-text">Sales</span>
         </a>
         <!-- end of nav -->
@@ -77,10 +77,22 @@
         <form id="addProductForm" enctype="multipart/form-data" class="text-white">
           <div class="row g-2 mb-2">
             <div class="col"><input type="text" name="name" class="form-control" placeholder="Name" required></div>
+            <div class="col">
+              <select id="category" name="category" class="form-control">
+                <option value="">Category</option>
+                <option value="barong">Barong</option>
+                <option value="filipiniana">Filipiniana</option>
+                <option value="motif">Motif</option>
+                <option value="accessories">Accessories</option>
+                <option value="fullset">Full Set</option>
+              </select>
+            </div>
+          </div>
+          <div class="row g-2 mb-2">
             <div class="col"><input type="text" name="description" class="form-control" placeholder="Description" required></div>
           </div>
           <div class="row g-2 mb-2">
-            <div class="col"><input type="number" min="0" name="qty" class="form-control" placeholder="Qty" required></div>
+            <div class="col"><input type="number" min="0" name="stock" class="form-control" placeholder="Quantity" required></div>
             <div class="col"><input type="number" step="0.01" name="price" class="form-control" placeholder="Price" required></div>
             <div class="col"><input type="file" name="image" class="form-control" accept="image/*" required></div>
           </div>
