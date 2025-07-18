@@ -55,7 +55,43 @@ async function loadUsers() {
   });
 }
 
-loadProducts(){}
+async function loadProducts(){
+
+  const product = this.dataset.ProductCategory;
+
+    switch (product) {
+      case 'all':
+          loadUsers();
+        break;
+      case 'barong':
+        loadProducts();
+        break;
+      case 'filipiniana':
+        break;
+      case 'motif':
+        break;
+      case 'accessory':
+        break;
+      default:
+        break;
+    }
+  async function fetchProductData() {
+
+  }
+  // Inject full table HTML into main-product table
+  document.getElementById("main-content").innerHTML =
+  `<h5>All Users</h5>
+    <table class="table table-bordered table-dark table-hover text-white" id="ProductsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Image</th><th>Product Name</th><th>Price</th><th>Stock</th><th>Description</th><th>Last Updated</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table> `;
+
+
+}
 
 
 document.getElementById("addProductForm").onsubmit = async (e) => {
@@ -83,8 +119,8 @@ document.getElementById("addProductForm").onsubmit = async (e) => {
 };
 
 
-loadUsers()
 document.querySelectorAll('.nav-link').forEach(link => {
+  // this.dataset.page = loadUsers;
   link.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -97,7 +133,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
 
     switch (page) {
       case 'users':
-          loadUsers()
+          loadUsers();
         break;
       case 'products':
         loadProducts();
@@ -110,4 +146,4 @@ document.querySelectorAll('.nav-link').forEach(link => {
   });
 });
 
-  // loadUsers();
+loadUsers();

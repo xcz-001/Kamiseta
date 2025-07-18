@@ -29,15 +29,17 @@
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownProduct">
               <li><button class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Barong</a></li>
+              <li><a data-ProductCategory="all" class="dropdown-item" href="#">All Products</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Filipiniana</a></li>
+              <li><a data-ProductCategory="Barong" class="dropdown-item" href="#">Barong</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Motif</a></li>
+              <li><a data-ProductCategory="filipiniana" class="dropdown-item" href="#">Filipiniana</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Accessories</a></li>
+              <li><a data-ProductCategory="motif" class="dropdown-item" href="#">Motif</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Fullset</a></li>
+              <li><a data-ProductCategory="accessory" class="dropdown-item" href="#">Accessories</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a data-ProductCategory="fullset" class="dropdown-item" href="#">Fullset</a></li>
               <li><hr class="dropdown-divider"></li>
           </ul>
         </div>
