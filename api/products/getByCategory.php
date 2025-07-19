@@ -7,7 +7,7 @@ $input = json_decode(file_get_contents("php://input"), true);
 $category = $input['category'] ?? '';
 
 try {
-    if ($category === '') {
+    if ($category === 'all') {
         $stmt = $pdo->query("SELECT * FROM products");
     } else {
         $stmt = $pdo->prepare("SELECT * FROM products WHERE category = ?");

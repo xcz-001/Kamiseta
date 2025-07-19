@@ -26,20 +26,20 @@
             <i class="bi bi-box-seam"></i> <span class="link-text ">Products</span>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownProduct">
-              <li><button class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button></li>
+          <ul id="productUl" class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownProduct">
+              <li class="px-2"><button class="text-dark btn btn-success rounded dropdown-item" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a data-ProductCategory="all" class="dropdown-item" href="#">All Products</a></li>
+              <li><button data-productcategory="all" class="dropdown-item" onclick="loadProducts(this)" >All Products</button></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a data-ProductCategory="Barong" class="dropdown-item" href="#">Barong</a></li>
+              <li><button data-productcategory="barong" class="dropdown-item" onclick="loadProducts(this)" >Barong</button></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a data-ProductCategory="filipiniana" class="dropdown-item" href="#">Filipiniana</a></li>
+              <li><button data-productcategory="filipiniana" class="dropdown-item" onclick="loadProducts(this)" >Filipiniana</button></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a data-ProductCategory="motif" class="dropdown-item" href="#">Motif</a></li>
+              <li><button data-productcategory="motif" class="dropdown-item" onclick="loadProducts(this)" >Motif</button></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a data-ProductCategory="accessory" class="dropdown-item" href="#">Accessories</a></li>
+              <li><botton data-productcategory="accessories" class="dropdown-item" onclick="loadProducts(this)" >Accessories</botton></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a data-ProductCategory="fullset" class="dropdown-item" href="#">Fullset</a></li>
+              <li><buttton data-productcategory="fullset" class="dropdown-item" onclick="loadProducts(this)" >Fullset</buttton></li>
               <li><hr class="dropdown-divider"></li>
           </ul>
         </div>
@@ -105,3 +105,84 @@
   </div>
 </div>
 
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="editProductForm"  onsubmit="editProductSave(event)">
+        <div class="modal-body">
+          <div class="row">
+            <!-- Left side: Existing data -->
+            <div class="col-md-6">
+              <h6>Current Product Details</h6>
+              <input type="hidden" name="id" id="editProductId">
+              <div class="mb-2">
+                <label>Product Name</label>
+                <input type="text" class="form-control" id="currentName" disabled>
+              </div>
+              <div class="mb-2">
+                <label>Price</label>
+                <input type="number" class="form-control" id="currentPrice" disabled>
+              </div>
+              <div class="mb-2">
+                <label>Stock</label>
+                <input type="number" class="form-control" id="currentStock" disabled>
+              </div>
+              <div class="mb-2">
+                <label>Description</label>
+                <input type="text" class="form-control" id="currentDescription" disabled >
+              </div>
+              <div class="mb-2">
+                <label>Category</label>
+                <input type="text" class="form-control" id="currentCategory" disabled>
+              </div>
+            </div>
+
+            <!-- Right side: Editable fields -->
+            <div class="col-md-6">
+              <h6>Update Product Details(leave blank to keep exixting)</h6>
+              <div class="mb-2">
+                <label>New Product Name</label>
+                <input type="text" name="name" class="form-control">
+              </div>
+              <div class="mb-2">
+                <label>New Price</label>
+                <input type="number" name="price" class="form-control">
+              </div>
+              <div class="mb-2">
+                <label>New Stock</label>
+                <input type="number" name="stock" class="form-control">
+              </div>
+              <div class="mb-2">
+                <label>New Description</label>
+                <input type="text" name="description" class="form-control">
+              </div>
+              <div class="mb-2">
+                <label>New Category</label>
+                <select id="category" name="category" class="form-control">
+                <option value=""></option>
+                <option value="barong">Barong</option>
+                <option value="filipiniana">Filipiniana</option>
+                <option value="motif">Motif</option>
+                <option value="accessories">Accessories</option>
+                <option value="fullset">Full Set</option>
+              </select>
+              </div>
+              <div class="mb-2">
+                <label>New Image</label>
+                <input type="file" name="image" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

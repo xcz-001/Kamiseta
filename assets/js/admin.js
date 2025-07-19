@@ -55,49 +55,84 @@ async function loadUsers() {
   });
 }
 
-async function loadProducts(){
-
-  const product = this.dataset.ProductCategory;
-
-    switch (product) {
-      case 'all':
-          loadUsers();
-        break;
-      case 'barong':
-        loadProducts();
-        break;
-      case 'filipiniana':
-        break;
-      case 'motif':
-        break;
-      case 'accessory':
-        break;
-      default:
-        break;
-    }
-  async function fetchProductData() {
-
+async function deleteProduct(id) {
+  if (!confirm("tapon na to?")) return;
+  const res = await fetch("../../api/products/delete.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id })
+  });
+  const result = await res.json();
+  console.log(result); // to catch any error message
+  if (result.success) {
+    loadProducts();
+  } else {
+    alert("Delete failed");
   }
-  // Inject full table HTML into main-product table
-  document.getElementById("main-content").innerHTML =
-  `<h5>All Users</h5>
+}
+
+
+async function loadProducts(input){
+   let productCategory = "all";
+
+  if (typeof input === "string") {
+    productCategory = input;
+  } else if (input?.dataset?.productcategory) {
+    productCategory = input.dataset.productcategory;
+  }
+
+  const res = await fetch("../../api/products/getByCategory.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ category: productCategory })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("main-content").innerHTML = `
+    <h5>Product Category: ${productCategory}</h5>
     <table class="table table-bordered table-dark table-hover text-white" id="ProductsTable">
       <thead>
         <tr>
-          <th>ID</th><th>Image</th><th>Product Name</th><th>Price</th><th>Stock</th><th>Description</th><th>Last Updated</th><th>Action</th>
+          <th>ID</th><th>Image</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Stock(pcs)</th>
+          <th>Description</th>
+          <th>Last Updated</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody></tbody>
-    </table> `;
+    </table>
+  `;
 
+  const tbody = document.querySelector("#ProductsTable tbody");
 
+  data.forEach(p => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${p.id}</td>
+      <td><img src="../../uploads/${p.filename}" class="thumb" /></td>
+      <td>${p.name}</td>
+      <td>${p.price}</td>
+      <td>${p.stock}</td>
+      <td>${p.description}</td>
+      <td>${p.updated_at}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})">Delete</button>
+        <button class="btn btn-primary btn-sm" id="editProductBtn-${p.id}" onclick="editProductLoad(${p.id})">Edit</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
 
 document.getElementById("addProductForm").onsubmit = async (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
-  console.log("Form data:", formData);
+  // console.log("Form data:", formData);
   // alert(formData)
   const res = await fetch("../../api/products/create.php", {
     method: "POST",
@@ -108,15 +143,59 @@ document.getElementById("addProductForm").onsubmit = async (e) => {
   if (result.success) {
     alert("Product added.");
     e.target.reset();
-    // loadProducts();
-  } else alert(result.error || "Error");
-
-   // Close modal
-    const modalEl = document.getElementById('addProductModal');
-    const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-    modal.hide();
-    this.reset();
+    closeModal('addProductModal');
+    // console.log(formData.get("category"));
+    loadProducts(formData.get("category"));
+  } else {
+    alert(result.error || "Error")
+  }
 };
+
+async function closeModal(modalID){
+  const modalEl = document.getElementById(modalID);
+  const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+  modal.hide();
+}
+
+function editProductLoad(id) {
+  fetch(`../../api/products/get_product.php?id=${id}`)
+    .then(res => res.json())
+    .then(data => {
+  //    new bootstrap.Modal(document.getElementById('editProductModal')).show();
+      const modalEl = document.getElementById('editProductModal');
+      const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+      modal.show();
+      document.getElementById('editProductId').value = data.id;
+      document.getElementById('currentName').value = data.name;
+      document.getElementById('currentPrice').value = data.price;
+      document.getElementById('currentStock').value = data.stock;
+      document.getElementById('currentDescription').value = data.description;
+      document.getElementById('currentCategory').value = data.category;
+    });
+}
+
+async function editProductSave(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  try {
+    const res = await fetch('../../api/products/edit.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      alert('Product updated');
+      closeModal('editProductModal');
+      loadProducts(result.category);
+    } else {
+      alert('Failed: ' + result.error);
+    }
+  } catch (err) {
+    console.error("Edit failed:", err);
+    alert("Something went wrong.");
+  }
+}
 
 
 document.querySelectorAll('.nav-link').forEach(link => {
@@ -136,7 +215,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
           loadUsers();
         break;
       case 'products':
-        loadProducts();
+        //console.logProducts();
         break;
       case 'sales':
         break;
