@@ -1,0 +1,106 @@
+html {
+  /* scroll-behavior: smooth; */
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+section {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 2rem;
+  position: relative;
+  z-index: 1;
+  scroll-snap-align: start;
+}
+
+.hero-section {
+  /* background-image: url('../img/herobg.png'); */
+  text-align: center;
+  color: #fff;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.navbar {
+  z-index: 10;
+}
+
+.navbar-dark .nav-link {
+  color: #f0f0f0;
+}
+
+.navbar-dark .nav-link:hover {
+  color: #03dac6;
+}
+
+footer {
+  background-color: #1a1a1a;
+  color: #ccc;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #f0f0f0;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #03dac6;
+}
+
+.crafted {
+  color: #ff6f61;
+}
+
+section#about {
+  background-image: url('../img/herobg.png');
+}
+
+section#payment {
+  background-image: url('../img/herobg2.jpeg');
+}
+
+section#shipping {
+  background-image: url('../img/herobg3.jpeg');
+}
+
+section#faq {
+  background-image: url('../img/herobg.png');
+}
+
+section#contact {
+  background-image: url('../img/herobg2.jpeg');
+}
+
+section#stores {
+  background-image: url('../img/herobg3.jpeg');
+}
